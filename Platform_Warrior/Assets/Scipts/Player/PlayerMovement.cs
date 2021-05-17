@@ -5,22 +5,21 @@ using UnityEngine;
 
 
 public class PlayerMovement : MonoBehaviour {
-    private float moveSpeed = 10f;
-    private float jumpForce = 10f;
-    //private float maxVelocity = 20f;
-    private float moveX;
+    private float moveSpeed = 10f,
+       jumpForce = 10f,
+       moveX;
 
-    public bool jumping = false;
-    public bool runningLeft;
-    public bool runningRight;
+    public bool jumping = false,
+        runningLeft,
+        runningRight;
 
     private Rigidbody2D rigBod;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
 
-    private const string WALK_ANIMATION = "Walk";
-    private const string JUMP_ANIMATION = "Jump";
-    private const string GROUND_TAG = "Ground";
+    private const string WALK_ANIMATION = "Walk",
+        JUMP_ANIMATION = "Jump",
+        GROUND_TAG = "Ground";
 
     // Start is called before the first frame update
     void Start() {

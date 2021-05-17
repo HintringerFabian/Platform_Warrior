@@ -7,23 +7,24 @@ public class CameraFollow : MonoBehaviour {
 
     private const string PLAYER_TAG = "Player";
 
-    private const float cameraOffsetX = 7f;
-    private const float cameraOffsetY = 2f;
-    private const float smoothSpeed = 7f;
-    private const float smoothJumpSpeed = 4f;
-    private const float jumpOffset = 5f;
-    private float smoothSpeedDelta;
-    private float smoothJumpSpeedDelta;
+    private const float cameraOffsetX = 7f,
+        cameraOffsetY = 2f,
+        smoothSpeed = 7f,
+        smoothJumpSpeed = 4f,
+        jumpOffset = 5f;
 
-    private Vector3 tempCameraPosition;
-    private Vector3 rotationAngles;
-    private Vector3 latestRotationOffet;
-    private Vector3 cameraJumpRotationOffset;
-    private Vector3 cameraNoRotation;
-    private Vector3 cameraOffsetVectorX;
-    private Vector3 cameraOffsetVectorY;
-    private Vector3 desiredPosition;
-    private Vector3 playerPosition;
+    private float smoothSpeedDelta,
+        smoothJumpSpeedDelta;
+
+    private Vector3 tempCameraPosition,
+        rotationAngles,
+        latestRotationOffet,
+        cameraJumpRotationOffset,
+        cameraNoRotation,
+        cameraOffsetVectorX,
+        cameraOffsetVectorY,
+        desiredPosition,
+        playerPosition;
 
     private GameObject playerObject;
     private PlayerMovement playerMovement;
