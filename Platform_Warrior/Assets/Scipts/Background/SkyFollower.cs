@@ -15,6 +15,10 @@ public class SkyFollower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // follow player 
         transform.position = player.transform.position;
+
+        // need script which generates background with ground which follows the player
+        // i would like the background following WITH a parallax effect
     }
 }
