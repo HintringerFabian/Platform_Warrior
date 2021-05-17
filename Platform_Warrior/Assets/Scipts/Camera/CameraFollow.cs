@@ -68,7 +68,7 @@ public class CameraFollow : MonoBehaviour {
     }
 
     void cameraFollowY(ref Vector3 tempCameraPosition, Vector3 playerPosition) {
-        tempCameraPosition = playerPosition + cameraOffsetVectorY;
+        tempCameraPosition.y = (playerPosition + cameraOffsetVectorY).y;
     }
 
     void cameraFollowX(ref Vector3 tempCameraPosition, Vector3 playerPosition, PlayerMovement playerMovement, float smoothSpeedDelta) {
