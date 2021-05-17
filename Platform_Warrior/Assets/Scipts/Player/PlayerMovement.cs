@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour {
     //private float maxVelocity = 20f;
     private float moveX;
 
-    private bool jumping = false;
+    public bool jumping = false;
     public bool runningLeft;
     public bool runningRight;
 
