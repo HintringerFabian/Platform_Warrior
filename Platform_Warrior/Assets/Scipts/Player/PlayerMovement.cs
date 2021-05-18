@@ -6,8 +6,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
     private float moveSpeed = 10f,
-       jumpForce = 12f,
-       moveX;
+        jumpForce = 12f,
+        moveX,
+        moveY;
 
     public bool jumping = false,
         runningLeft,
@@ -48,6 +49,12 @@ public class PlayerMovement : MonoBehaviour {
     // get input for running
     void playerKeyboardInput() {
         moveX = Input.GetAxisRaw("Horizontal");
+        moveY = Input.GetAxisRaw("Vertical");
+        if( moveY > 0 ) {
+            moveY = 0;
+        } else if (moveY < 0 ) {
+            rigBod.AddForce(new Vector2(0f, -jumpForce*1f));
+        }
         transform.position += new Vector3(moveX, 0f) * Time.deltaTime * moveSpeed;
     }
 
@@ -56,32 +63,32 @@ public class PlayerMovement : MonoBehaviour {
         if( Input.GetButtonDown("Jump") && jumping == false) {
             rigBod.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
             jumping = true;
-            animator.SetTrigger(JUMP_ANIMATION);
+            setJumpAnim();
         }
     }
 
+    private void setJumpAnim() {
+        animator.SetTrigger(JUMP_ANIMATION);
+    }
+
     // animation for the movement
-    private void animateCharacter() {
-        if( moveX < 0 ) {
-            // running left side
+    private void animateCharacter() {   
+        if( moveX < 0) {
             animator.SetBool(WALK_ANIMATION, true);
             spriteRenderer.flipX = true;
             runningLeft = true;
             runningRight = false;
-        } else if( moveX > 0 ) {
-            // running right side
+        } else if( moveX > 0) {
             animator.SetBool(WALK_ANIMATION, true);
             spriteRenderer.flipX = false;
             runningLeft = false;
             runningRight = true;
-        } else {
-            // standing still
+        } else if(moveX ==0 ) {
             animator.SetBool(WALK_ANIMATION, false);
             runningLeft = false;
             runningRight = false;
         }
     }
-
 
     // when landing back on the ground set the bool jumping to false
     // then the character will be able to jump again
@@ -93,6 +100,8 @@ public class PlayerMovement : MonoBehaviour {
 
     private void OnTriggerExit2D(Collider2D collision) {
         jumping = true;
+        setJumpAnim();
         // create falling animation + think of falling code when player is falling
+        // replace with the setJumpAnim
     }
 }
