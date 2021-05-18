@@ -18,7 +18,7 @@ public class SkyFollower : MonoBehaviour
         // follow player 
         transform.position = player.transform.position;
 
-        // need script which generates background with ground which follows the player
+        // need script which generates background with clouds which follows the player
         // i would like the background following WITH a parallax effect
     }
 }
