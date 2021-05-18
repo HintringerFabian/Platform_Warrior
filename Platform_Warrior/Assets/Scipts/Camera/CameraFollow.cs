@@ -8,10 +8,10 @@ public class CameraFollow : MonoBehaviour {
     private const string PLAYER_TAG = "Player";
 
     private const float cameraOffsetX = 7f,
-        cameraOffsetY = 2f,
+        cameraOffsetY = 3f,
         smoothSpeed = 7f,
-        smoothJumpSpeed = 4f,
-        jumpOffset = 5f;
+        smoothJumpSpeed = 2.5f,
+        jumpOffset = 8f;
 
     private float smoothSpeedDelta,
         smoothJumpSpeedDelta;
@@ -56,10 +56,19 @@ public class CameraFollow : MonoBehaviour {
         // modify temp data
         cameraFollowX();
         cameraFollowY();
+        cameraFollowZ();
 
         // apply the changes onto the camera
         transform.position = tempCameraPosition;
 
+    }
+
+    private void cameraFollowZ() {
+        if( playerMovement.jumping && tempCameraPosition.z >=-50) {
+            tempCameraPosition.z -= new Vector3(0f, 0f, .05f).z;
+        } else if( !playerMovement.jumping && tempCameraPosition.z <=-40 ) {
+            tempCameraPosition.z += new Vector3(0f, 0f, .05f).z;
+        }
     }
 
     private void setCameraAngle() {
