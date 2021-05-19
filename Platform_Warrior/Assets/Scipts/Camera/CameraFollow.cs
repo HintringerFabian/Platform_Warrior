@@ -9,8 +9,8 @@ public class CameraFollow : MonoBehaviour {
     private const float cameraOffsetX = 10f,
         cameraOffsetY = 3f,
         smoothRunSpeed = 7f,
-        smoothJumpSpeed = 2.5f,
-        jumpOffset = 6f;
+        smoothJumpSpeed = 4f,
+        jumpOffset = 6.5f;
 
     private float smoothJumpSpeedDelta,
         smoothRunSpeedDelta;
