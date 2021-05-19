@@ -12,6 +12,9 @@ public class CameraFollow : MonoBehaviour {
         smoothJumpSpeed = 2.5f,
         jumpOffset = 6f;
 
+    private float smoothJumpSpeedDelta,
+        smoothRunSpeedDelta;
+
     private Vector3 tempCameraPosition,
         latestRotationOffet,
         playerPosition;
@@ -26,6 +29,10 @@ public class CameraFollow : MonoBehaviour {
     private void LateUpdate() {
         playerMovement = playerObject.GetComponent<PlayerMovement>();
         playerPosition = playerObject.transform.position;
+
+        smoothJumpSpeedDelta = smoothJumpSpeed * Time.deltaTime;
+        smoothRunSpeedDelta = smoothRunSpeed * Time.deltaTime;
+
         setCameraPosition();
         setCameraAngle();
     }
@@ -34,7 +41,6 @@ public class CameraFollow : MonoBehaviour {
     private void setCameraPosition() {
         // get necassary data 
         tempCameraPosition = transform.position;
-        
 
         // modify temp data
         cameraFollowX();
@@ -43,7 +49,6 @@ public class CameraFollow : MonoBehaviour {
 
         // apply the changes onto the camera
         transform.position = tempCameraPosition;
-
     }
     private void cameraFollowX() {
         Vector3 desiredPosition = playerPosition;
@@ -55,11 +60,11 @@ public class CameraFollow : MonoBehaviour {
             desiredPosition -= cameraOffsetVectorX;
         }
 
-        tempCameraPosition.x = Vector3.Lerp(tempCameraPosition, desiredPosition, smoothRunSpeed * Time.deltaTime).x;
+        tempCameraPosition.x = Vector3.Lerp(tempCameraPosition, desiredPosition, smoothRunSpeedDelta).x;
     }
     private void cameraFollowY() {
         Vector3 desiredPosition = playerPosition + new Vector3(0f, cameraOffsetY, 0f);
-        tempCameraPosition.y = Vector3.Lerp(tempCameraPosition, desiredPosition, smoothRunSpeed * Time.deltaTime).y;
+        tempCameraPosition.y = Vector3.Lerp(tempCameraPosition, desiredPosition, smoothRunSpeedDelta).y;
     }
     private void cameraFollowZ() {
         if( (playerMovement.isJumping || playerMovement.isFalling) && tempCameraPosition.z >=-50) {
@@ -73,15 +78,12 @@ public class CameraFollow : MonoBehaviour {
     private void setCameraAngle() {
         playerMovement = playerObject.GetComponent<PlayerMovement>();
         Vector3 rotationAngles;
-        Vector3 cameraJumpRotationOffset = new Vector3(jumpOffset, 0f);
-        Vector3 cameraNoRotation = new Vector3(0f, 0f);
-        float smoothJumpSpeedDelta = smoothJumpSpeed * Time.deltaTime;
 
         if( playerMovement.isFalling ) {
-            rotationAngles = Vector3.Lerp(transform.eulerAngles, cameraJumpRotationOffset, smoothJumpSpeedDelta);
+            rotationAngles = Vector3.Lerp(transform.eulerAngles, new Vector3(jumpOffset, 0f), smoothJumpSpeedDelta);
             latestRotationOffet = rotationAngles;
         } else {
-            rotationAngles = Vector3.Lerp(latestRotationOffet, cameraNoRotation, smoothJumpSpeedDelta);
+            rotationAngles = Vector3.Lerp(latestRotationOffet, new Vector3(0f, 0f), smoothJumpSpeedDelta);
             latestRotationOffet = rotationAngles;
         }
 
