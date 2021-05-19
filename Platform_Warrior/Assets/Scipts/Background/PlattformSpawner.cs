@@ -24,7 +24,7 @@ public class PlattformSpawner : MonoBehaviour {
 
             int randomNegPos = ( Random.Range( 0 , 2 ) * 2 ) - 1;
             float yOffset = System.Convert.ToSingle( Random.Range( 3 , 7 ) );
-            float xOffset = (System.Convert.ToSingle( Random.Range( 4 , 8 ) )
+            float xOffset = (System.Convert.ToSingle( Random.Range( 5 , 11 ) )
                 + ( sprite.bounds.size.x + spawnedSprite.bounds.size.x ) / 2 )
                 * randomNegPos;
 
