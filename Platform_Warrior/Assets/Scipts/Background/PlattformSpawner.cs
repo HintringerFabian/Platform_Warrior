@@ -31,6 +31,10 @@ public class PlattformSpawner : MonoBehaviour {
             spawnedPlattform.transform.position = transform.position + new Vector3( xOffset , yOffset );
 
             plattformSpawned = true;
+
+            // todo 
+            // implement plattform despawning after a few seconds 
+            // despawn 15 seconds after enemy has been slain, ... think of something
         }
     }
 }
