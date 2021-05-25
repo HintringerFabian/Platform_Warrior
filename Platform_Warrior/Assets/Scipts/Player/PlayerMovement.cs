@@ -40,34 +40,34 @@ public class PlayerMovement : MonoBehaviour {
 
     // Update is called once per frame
     private void Update() {
-        getKeyboardInput();
-        processKeyboardInput();
+        GetKeyboardInput();
+        ProcessKeyboardInput();
     }
 
     private void LateUpdate() {
-        animateCharacter();
+        AnimateCharacter();
     }
 
     // get input for running
-    private void getKeyboardInput() {
+    private void GetKeyboardInput() {
         moveX = Input.GetAxisRaw("Horizontal");
         moveY = Input.GetAxisRaw("Vertical");
         jumpInput = Input.GetButtonDown("Jump");
     }
 
     // process input
-    private void processKeyboardInput() {
-        if( jumpInput ) checkPlayerJump();
-        checkMidAir();
+    private void ProcessKeyboardInput() {
+        if( jumpInput ) CheckPlayerJump();
+        CheckMidAir();
     }
-    private void checkPlayerJump() {
+    private void CheckPlayerJump() {
         if( !isJumping && !isFalling ) {
             rigBod.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
             isJumping = true;
             isFalling = false;
         }
     }
-    private void checkMidAir() {
+    private void CheckMidAir() {
         // check if jump is aborted by pressing S
         if( moveY > 0 ) {
             moveY = 0;
@@ -88,23 +88,23 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     // animation for the movement
-    private void animateCharacter() {
+    private void AnimateCharacter() {
         // todo first check if jumping or falling, 
         // then check if walking
         // else idle
         // even when jumping or falling sprite needs to flip
 
-        setSpriteDirection();
+        SetSpriteDirection();
 
         if (isJumping || isFalling) {
-            setJumpAnim();
+            SetJumpAnim();
         }else if( moveX != 0) {
-            setWalkAnim(true);
+            SetWalkAnim(true);
         } else {
-            setWalkAnim(false);
+            SetWalkAnim(false);
         }
     }
-    private void setSpriteDirection() {
+    private void SetSpriteDirection() {
         if( moveX < 0 ) {
             spriteRenderer.flipX = true;
             runningLeft = true;
@@ -121,13 +121,13 @@ public class PlayerMovement : MonoBehaviour {
         // player sprite should not rotate when hitting something
         transform.eulerAngles = playerInitialRotation;
     }
-    private void setJumpAnim() {
+    private void SetJumpAnim() {
         if( !jumpAnimPlaying ) {
             animator.SetTrigger(JUMP_ANIMATION);
             jumpAnimPlaying = true;
         }
     }
-    private void setWalkAnim(bool input) {
+    private void SetWalkAnim(bool input) {
         animator.SetBool(WALK_ANIMATION, input);
         jumpAnimPlaying = false;
     }
