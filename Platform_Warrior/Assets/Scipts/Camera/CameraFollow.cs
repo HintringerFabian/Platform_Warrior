@@ -33,24 +33,24 @@ public class CameraFollow : MonoBehaviour {
         smoothJumpSpeedDelta = smoothJumpSpeed * Time.deltaTime;
         smoothRunSpeedDelta = smoothRunSpeed * Time.deltaTime;
 
-        setCameraPosition();
-        setCameraAngle();
+        SetCameraPosition();
+        SetCameraAngle();
     }
 
     // set camera position
-    private void setCameraPosition() {
+    private void SetCameraPosition() {
         // get necassary data 
         tempCameraPosition = transform.position;
 
         // modify temp data
-        cameraFollowX();
-        cameraFollowY();
-        cameraFollowZ();
+        CameraFollowX();
+        CameraFollowY();
+        CameraFollowZ();
 
         // apply the changes onto the camera
         transform.position = tempCameraPosition;
     }
-    private void cameraFollowX() {
+    private void CameraFollowX() {
         Vector3 desiredPosition = playerPosition;
         Vector3 cameraOffsetVectorX = new Vector3(cameraOffsetX, 0f, 0f);
         // camera switching left or right from player according to direction player is running
@@ -62,11 +62,11 @@ public class CameraFollow : MonoBehaviour {
 
         tempCameraPosition.x = Vector3.Lerp(tempCameraPosition, desiredPosition, smoothRunSpeedDelta).x;
     }
-    private void cameraFollowY() {
+    private void CameraFollowY() {
         Vector3 desiredPosition = playerPosition + new Vector3(0f, cameraOffsetY, 0f);
         tempCameraPosition.y = Vector3.Lerp(tempCameraPosition, desiredPosition, smoothRunSpeedDelta).y;
     }
-    private void cameraFollowZ() {
+    private void CameraFollowZ() {
         if( (playerMovement.isJumping || playerMovement.isFalling) && tempCameraPosition.z >=-50) {
             tempCameraPosition.z -= new Vector3(0f, 0f, .05f).z;
         } else if( (!playerMovement.isJumping || !playerMovement.isFalling) && tempCameraPosition.z <=-40 ) {
@@ -75,7 +75,7 @@ public class CameraFollow : MonoBehaviour {
     }
 
     // set camera angle
-    private void setCameraAngle() {
+    private void SetCameraAngle() {
         playerMovement = playerObject.GetComponent<PlayerMovement>();
         Vector3 rotationAngles;
 
