@@ -141,6 +141,12 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
+    private void OnCollisionStay2D( Collision2D collision ) {
+        if(collision.gameObject.CompareTag(GROUND_TAG) || collision.gameObject.CompareTag( PLATTFORM_TAG ) ) {
+            isFalling = false;
+        }
+    }
+
     private void OnTriggerExit2D(Collider2D collision) {
         if( !isJumping ) isFalling = true;
         // create falling animation 
