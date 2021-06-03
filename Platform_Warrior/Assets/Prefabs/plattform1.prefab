@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3224051741944187493}
   - component: {fileID: 3224051741944187492}
   - component: {fileID: 3224051741944187495}
-  - component: {fileID: 3224051741944187494}
   - component: {fileID: 3224051741944187489}
+  - component: {fileID: 148967329819280659}
   m_Layer: 0
   m_Name: plattform1
   m_TagString: Plattform
@@ -131,36 +131,12 @@ PolygonCollider2D:
       - {x: -1.01, y: -0.59999996}
       - {x: -0.83, y: -0.61}
       - {x: -0.58, y: -0.62}
+      - {x: 0.060685467, y: -0.6337029}
       - {x: 0.44, y: -0.62}
+      - {x: 0.6135766, y: -0.61458504}
       - {x: 0.69, y: -0.61}
       - {x: 0.87, y: -0.59999996}
       - {x: 1.35, y: -0.57}
---- !u!61 &3224051741944187494
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3224051741944187498}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.1, y: -0.17}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5, y: 2}
-    newSize: {x: 5, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 4.8, y: 0.1}
-  m_EdgeRadius: 0
 --- !u!114 &3224051741944187489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,3 +154,15 @@ MonoBehaviour:
   - {fileID: 1956017844114456533, guid: 0c8e28bbd81e9cd40b7b8aca9b3a9fa7, type: 3}
   - {fileID: 3222191594221702172, guid: ea39cf420d0e30e4b92743fa33e52b13, type: 3}
   - {fileID: 6621447076023113846, guid: e6d6f5b7cad932e4abcd041753ee733b, type: 3}
+--- !u!114 &148967329819280659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3224051741944187498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3143e2176bb7c54686ac93e90d64dd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

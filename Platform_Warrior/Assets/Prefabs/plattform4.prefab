@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6621447076023113847}
   - component: {fileID: 6621447076023113842}
-  - component: {fileID: 6621447076023113841}
   - component: {fileID: 6621447076023113840}
   - component: {fileID: 6621447076023113843}
+  - component: {fileID: 581116385997516665}
   m_Layer: 0
   m_Name: plattform4
   m_TagString: Plattform
@@ -85,32 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &6621447076023113841
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6621447076023113846}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.15, y: -0.33}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5, y: 2}
-    newSize: {x: 5, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.3, y: 0.1}
-  m_EdgeRadius: 0
 --- !u!60 &6621447076023113840
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -163,3 +137,15 @@ MonoBehaviour:
   - {fileID: 1956017844114456533, guid: 0c8e28bbd81e9cd40b7b8aca9b3a9fa7, type: 3}
   - {fileID: 3222191594221702172, guid: ea39cf420d0e30e4b92743fa33e52b13, type: 3}
   - {fileID: 6621447076023113846}
+--- !u!114 &581116385997516665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6621447076023113846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3143e2176bb7c54686ac93e90d64dd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
