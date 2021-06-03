@@ -1,22 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-
 public class PlayerMovement : MonoBehaviour {
-    private float moveSpeed = 10f,
-        jumpForce = 12f,
-        moveX,
-        moveY,
-        oldPlayerPosY;
+    private readonly float moveSpeed = 10f;
+    private readonly float jumpForce = 12f;
 
-    public bool isJumping = false,
-        jumpInput = false,
-        isFalling = false,
-        jumpAnimPlaying,
-        initGroundTouch = false,
-        runningLeft,
-        runningRight;
+    private float oldPlayerPosY;
+    private float moveX;
+    private float moveY;
+
+    private bool jumpInput;
+    private bool jumpAnimPlaying;
+    private bool initGroundTouch = false;
+    private bool runningLeft;
+    private bool runningRight;
+    private bool isJumping;
+    private bool isFalling = false;
+
+    public bool IsJumping { get => isJumping; }
+    public bool IsFalling { get => isFalling; }
+    public bool RunningRight { get => runningRight; }
+    public bool RunningLeft { get => runningLeft; }
 
     private Vector3 playerInitialRotation;
 
@@ -50,37 +53,37 @@ public class PlayerMovement : MonoBehaviour {
 
     // get input for running
     private void GetKeyboardInput() {
-        moveX = Input.GetAxisRaw("Horizontal");
-        moveY = Input.GetAxisRaw("Vertical");
-        jumpInput = Input.GetButtonDown("Jump");
+        moveX = Input.GetAxisRaw( "Horizontal" );
+        moveY = Input.GetAxisRaw( "Vertical" );
+        jumpInput = Input.GetButtonDown( "Jump" );
     }
 
     // process input
     private void ProcessKeyboardInput() {
-        if( jumpInput ) CheckPlayerJump();
+        if ( jumpInput ) CheckPlayerJump();
         CheckMidAir();
     }
     private void CheckPlayerJump() {
-        if( !isJumping && !isFalling ) {
-            rigBod.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+        if ( !isJumping && !isFalling ) {
+            rigBod.AddForce( new Vector2( 0f , jumpForce ) , ForceMode2D.Impulse );
             isJumping = true;
             isFalling = false;
         }
     }
     private void CheckMidAir() {
         // check if jump is aborted by pressing S
-        if( moveY > 0 ) {
+        if ( moveY > 0 ) {
             moveY = 0;
-        } else if( moveY < 0 ) {
-            rigBod.AddForce(new Vector2(0f, -jumpForce * .5f));
-            if( isJumping ) {
+        } else if ( moveY < 0 ) {
+            rigBod.AddForce( new Vector2( 0f , -jumpForce * .5f ) );
+            if ( isJumping ) {
                 isFalling = true;
                 isJumping = false;
             }
         }
-        transform.position += new Vector3(moveX, 0f) * Time.deltaTime * moveSpeed;
+        transform.position += new Vector3( moveX , 0f ) * Time.deltaTime * moveSpeed;
         // check if player character is falling
-        if( oldPlayerPosY > transform.position.y && initGroundTouch ) {
+        if ( oldPlayerPosY > transform.position.y && initGroundTouch ) {
             isFalling = true;
             isJumping = false;
         }
@@ -96,24 +99,24 @@ public class PlayerMovement : MonoBehaviour {
 
         SetSpriteDirection();
 
-        if (isJumping || isFalling) {
+        if ( isJumping || isFalling ) {
             SetJumpAnim();
-        }else if( moveX != 0) {
-            SetWalkAnim(true);
+        } else if ( moveX != 0 ) {
+            SetWalkAnim( true );
         } else {
-            SetWalkAnim(false);
+            SetWalkAnim( false );
         }
     }
     private void SetSpriteDirection() {
-        if( moveX < 0 ) {
+        if ( moveX < 0 ) {
             spriteRenderer.flipX = true;
             runningLeft = true;
             runningRight = false;
-        } else if( moveX > 0 ) {
+        } else if ( moveX > 0 ) {
             spriteRenderer.flipX = false;
             runningLeft = false;
             runningRight = true;
-        } else if( moveX == 0 ) {
+        } else if ( moveX == 0 ) {
             runningLeft = false;
             runningRight = false;
         }
@@ -122,19 +125,19 @@ public class PlayerMovement : MonoBehaviour {
         transform.eulerAngles = playerInitialRotation;
     }
     private void SetJumpAnim() {
-        if( !jumpAnimPlaying ) {
-            animator.SetTrigger(JUMP_ANIMATION);
+        if ( !jumpAnimPlaying ) {
+            animator.SetTrigger( JUMP_ANIMATION );
             jumpAnimPlaying = true;
         }
     }
-    private void SetWalkAnim(bool input) {
-        animator.SetBool(WALK_ANIMATION, input);
+    private void SetWalkAnim( bool input ) {
+        animator.SetBool( WALK_ANIMATION , input );
         jumpAnimPlaying = false;
     }
 
     // collision
-    private void OnCollisionEnter2D(Collision2D collision) {
-        if( collision.gameObject.CompareTag(GROUND_TAG) || collision.gameObject.CompareTag(PLATTFORM_TAG) ) {
+    private void OnCollisionEnter2D( Collision2D collision ) {
+        if ( collision.gameObject.CompareTag( GROUND_TAG ) || collision.gameObject.CompareTag( PLATTFORM_TAG ) ) {
             isJumping = false;
             isFalling = false;
             initGroundTouch = true;
@@ -142,13 +145,13 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void OnCollisionStay2D( Collision2D collision ) {
-        if(collision.gameObject.CompareTag(GROUND_TAG) || collision.gameObject.CompareTag( PLATTFORM_TAG ) ) {
+        if ( collision.gameObject.CompareTag( GROUND_TAG ) || collision.gameObject.CompareTag( PLATTFORM_TAG ) ) {
             isFalling = false;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision) {
-        if( !isJumping ) isFalling = true;
+    private void OnTriggerExit2D( Collider2D collision ) {
+        if ( !isJumping ) isFalling = true;
         // create falling animation 
         // replace with the setJumpAnim
     }

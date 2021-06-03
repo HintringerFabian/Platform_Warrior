@@ -67,9 +67,9 @@ public class CameraFollow : MonoBehaviour {
         tempCameraPosition.y = Vector3.Lerp(tempCameraPosition, desiredPosition, smoothRunSpeedDelta).y;
     }
     private void CameraFollowZ() {
-        if( (playerMovement.isJumping || playerMovement.isFalling) && tempCameraPosition.z >=-50) {
+        if( (playerMovement.IsJumping || playerMovement.isFalling) && tempCameraPosition.z >=-50) {
             tempCameraPosition.z -= new Vector3(0f, 0f, .05f).z;
-        } else if( (!playerMovement.isJumping || !playerMovement.isFalling) && tempCameraPosition.z <=-40 ) {
+        } else if( (!playerMovement.IsJumping || !playerMovement.isFalling) && tempCameraPosition.z <=-40 ) {
             tempCameraPosition.z += new Vector3(0f, 0f, .05f).z;
         }
     }
