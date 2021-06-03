@@ -4,19 +4,25 @@ using SysRandom = System.Random;
 public class CloudParallax : MonoBehaviour {
 
     [SerializeField]
-    private GameObject player;
+    private GameObject player, sky;
 
-    private float xPlayerDistance;
-    private float startPosY;
-    private float startPosX;
+    private float startPosY, startPosX;
+    private float skyLengthX, skyLengthY;
+    
+    private float skyLengthXhalv, skyLengthYhalv;
 
     private float parallaxStrength;
 
     private void Start() {
-        xPlayerDistance = transform.position.x - player.transform.position.x;
         startPosY = transform.position.y;
         startPosX = transform.position.x;
+
         parallaxStrength = 0.4f;
+
+        skyLengthX = sky.GetComponent<SpriteRenderer>().bounds.size.x;
+        skyLengthY = sky.GetComponent<SpriteRenderer>().bounds.size.y;
+        skyLengthXhalv = skyLengthX / 2;
+        skyLengthYhalv = skyLengthY / 2;
     }
 
     private void LateUpdate() {
@@ -25,13 +31,24 @@ public class CloudParallax : MonoBehaviour {
         float distY = playerPos.y * parallaxStrength;
         float distX = playerPos.x * parallaxStrength;
 
-        float cloudX = startPosX + distX;
-        float cloudY = startPosY + distY;
-
-        transform.position = new Vector3( cloudX , cloudY , playerPos.z );
+        transform.position = new Vector3( startPosX + distX , startPosY + distY , playerPos.z );
 
 
-        // if cloud is too low, too high, too much right or left
-        // change position of clouds
+        float tempX = playerPos.x * ( 1 - parallaxStrength );
+        float tempY = playerPos.y * ( 1 - parallaxStrength );
+
+         
+
+        if ( tempX > startPosX + skyLengthXhalv ) {
+            startPosX += skyLengthX;
+        } else if ( tempX < startPosX - skyLengthXhalv ) {
+            startPosX -= skyLengthX;
+        }
+        
+        if ( tempY > startPosY + skyLengthYhalv ) {
+            startPosY += skyLengthY;
+        } else if ( tempY < startPosY - skyLengthYhalv ) {
+            startPosY -= skyLengthY;
+        }
     }
 }
