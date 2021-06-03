@@ -54,9 +54,9 @@ public class CameraFollow : MonoBehaviour {
         Vector3 desiredPosition = playerPosition;
         Vector3 cameraOffsetVectorX = new Vector3(cameraOffsetX, 0f, 0f);
         // camera switching left or right from player according to direction player is running
-        if( playerMovement.runningRight == true ) {
+        if( playerMovement.RunningRight == true ) {
             desiredPosition += cameraOffsetVectorX;
-        } else if( playerMovement.runningLeft == true ) {
+        } else if( playerMovement.RunningLeft == true ) {
             desiredPosition -= cameraOffsetVectorX;
         }
 
@@ -67,9 +67,9 @@ public class CameraFollow : MonoBehaviour {
         tempCameraPosition.y = Vector3.Lerp(tempCameraPosition, desiredPosition, smoothRunSpeedDelta).y;
     }
     private void CameraFollowZ() {
-        if( (playerMovement.IsJumping || playerMovement.isFalling) && tempCameraPosition.z >=-50) {
+        if( (playerMovement.IsJumping || playerMovement.IsFalling) && tempCameraPosition.z >=-50) {
             tempCameraPosition.z -= new Vector3(0f, 0f, .05f).z;
-        } else if( (!playerMovement.IsJumping || !playerMovement.isFalling) && tempCameraPosition.z <=-40 ) {
+        } else if( (!playerMovement.IsJumping || !playerMovement.IsFalling) && tempCameraPosition.z <=-40 ) {
             tempCameraPosition.z += new Vector3(0f, 0f, .05f).z;
         }
     }
@@ -79,7 +79,7 @@ public class CameraFollow : MonoBehaviour {
         playerMovement = playerObject.GetComponent<PlayerMovement>();
         Vector3 rotationAngles;
 
-        if( playerMovement.isFalling ) {
+        if( playerMovement.IsFalling ) {
             rotationAngles = Vector3.Lerp(transform.eulerAngles, new Vector3(jumpOffset, 0f), smoothJumpSpeedDelta);
             latestRotationOffet = rotationAngles;
         } else {
