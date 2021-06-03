@@ -49,11 +49,11 @@ public class PlayerMovement : MonoBehaviour {
         moveX = Input.GetAxisRaw( "Horizontal" );
         moveY = Input.GetAxisRaw( "Vertical" );
         jumpInput = Input.GetButtonDown( "Jump" );
-        
+
         // process keyboard input
         if ( jumpInput ) {
-            
-            if (!( isJumping && isFalling )) {
+
+            if ( !isJumping && !isFalling ) {
                 rigBod.AddForce( new Vector2( 0f , jumpForce ) , ForceMode2D.Impulse );
                 isJumping = true;
                 isFalling = false;
