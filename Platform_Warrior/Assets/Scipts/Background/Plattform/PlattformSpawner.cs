@@ -8,13 +8,18 @@ public class PlattformSpawner : MonoBehaviour {
 
     bool plattformSpawned;
 
+    private const int minYDist = 3;
+    private const int maxYDist = 7;
+    private const int minXDist = 5;
+    private const int maxXDist = 11;
 
-    // Start is called before the first frame update
     void Start() {
+
         plattformSpawned = false;
     }
 
     private void OnCollisionEnter2D( Collision2D collision ) {
+
         if ( !plattformSpawned ) {
             int plattformNr = Random.Range( 0 , plattform.Length );
 
@@ -23,8 +28,8 @@ public class PlattformSpawner : MonoBehaviour {
             SpriteRenderer spawnedSprite = spawnedPlattform.GetComponent<SpriteRenderer>();
 
             int randomNegPos = ( Random.Range( 0 , 2 ) * 2 ) - 1;
-            float yOffset = System.Convert.ToSingle( Random.Range( 3 , 7 ) );
-            float xOffset = (System.Convert.ToSingle( Random.Range( 5 , 11 ) )
+            float yOffset = System.Convert.ToSingle( Random.Range( minYDist , maxYDist ) );
+            float xOffset = (System.Convert.ToSingle( Random.Range( minXDist , maxXDist ) )
                 + ( sprite.bounds.size.x + spawnedSprite.bounds.size.x ) / 2 )
                 * randomNegPos;
 
