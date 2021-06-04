@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 
-    private readonly float moveSpeed = 10f;
-    private readonly float jumpForce = 12f;
+    private const float moveSpeed = 10f;
+    private const float jumpForce = 12f;
 
     private float oldPlayerPosY;
     private float moveX;
@@ -11,22 +11,21 @@ public class PlayerMovement : MonoBehaviour {
 
     private bool jumpInput;
     private bool jumpAnimPlaying;
-    private bool initGroundTouch = false;
+    private bool initGroundTouch;
     private bool runningLeft;
     private bool runningRight;
     private bool isJumping;
-    private bool isFalling = false;
+    private bool isFalling;
 
     public bool IsJumping { get => isJumping; }
     public bool IsFalling { get => isFalling; }
     public bool RunningRight { get => runningRight; }
     public bool RunningLeft { get => runningLeft; }
 
-    private Vector3 playerInitialRotation;
-
     private Rigidbody2D rigBod;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
+    private Vector3 playerInitialRotation;
 
     private const string WALK_ANIMATION = "Walk",
         JUMP_ANIMATION = "Jump",
@@ -41,6 +40,9 @@ public class PlayerMovement : MonoBehaviour {
 
         playerInitialRotation = transform.eulerAngles;
         oldPlayerPosY = transform.position.y;
+
+        initGroundTouch = false;
+        isFalling = false;
     }
 
     private void Update() {
@@ -104,6 +106,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private void SetSpriteDirection() {
 
+        // according to the direction the player is moving set the sprite direction
         if ( moveX < 0 ) {
             spriteRenderer.flipX = true;
             runningLeft = true;
@@ -129,6 +132,7 @@ public class PlayerMovement : MonoBehaviour {
             jumpAnimPlaying = true;
         }
     }
+
     private void SetWalkAnim( bool input ) {
 
         animator.SetBool( WALK_ANIMATION , input );

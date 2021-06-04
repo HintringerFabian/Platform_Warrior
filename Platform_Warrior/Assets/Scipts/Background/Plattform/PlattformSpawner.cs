@@ -19,12 +19,17 @@ public class PlattformSpawner : MonoBehaviour {
     private void OnCollisionEnter2D( Collision2D collision ) {
 
         if ( !plattformSpawned ) {
+            // select random plattform
             int plattformNr = Random.Range( 0 , plattform.Length );
 
             SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+
+            // create the plattform we selected randomly and get its sprite/graphics
             GameObject spawnedPlattform = Instantiate( plattform[plattformNr] );
             SpriteRenderer spawnedSprite = spawnedPlattform.GetComponent<SpriteRenderer>();
 
+            // place the new plattform in a random range (from, to)
+            // but make sure to be not placed above the plattform we are standing on
             int randomNegPos = ( Random.Range( 0 , 2 ) * 2 ) - 1;
             float yOffset = System.Convert.ToSingle( Random.Range( minYDist , maxYDist ) );
             float xOffset = (System.Convert.ToSingle( Random.Range( minXDist , maxXDist ) )
@@ -34,10 +39,6 @@ public class PlattformSpawner : MonoBehaviour {
             spawnedPlattform.transform.position = transform.position + new Vector3( xOffset , yOffset );
 
             plattformSpawned = true;
-
-            // todo 
-            // implement plattform despawning after a few seconds 
-            // despawn 15 seconds after enemy has been slain, ... think of something
         }
     }
 }

@@ -26,6 +26,8 @@ public class CloudParallax : MonoBehaviour {
 
     private void LateUpdate() {
 
+        // get distance of player moved and apply a parallax effect 
+        // (slower moving than the player onto it)
         Vector3 playerPos = player.transform.position;
 
         float distY = playerPos.y * parallaxStrength;
@@ -33,20 +35,21 @@ public class CloudParallax : MonoBehaviour {
 
         transform.position = new Vector3( startPosX + distX , startPosY + distY , playerPos.z );
 
-        float tempX = playerPos.x * ( 1 - parallaxStrength );
-        float tempY = playerPos.y * ( 1 - parallaxStrength );
+        // if moving out of the sky graphics reset the position to the opposite side
+        float posX = playerPos.x * ( 1 - parallaxStrength );
+        float posY = playerPos.y * ( 1 - parallaxStrength );
 
-        if ( tempX > startPosX + skyLengthXhalv ) {
+        if ( posX > startPosX + skyLengthXhalv ) {
             startPosX += skyLengthX;
 
-        } else if ( tempX < startPosX - skyLengthXhalv ) {
+        } else if ( posX < startPosX - skyLengthXhalv ) {
             startPosX -= skyLengthX;
         }
         
-        if ( tempY > startPosY + skyLengthYhalv ) {
+        if ( posY > startPosY + skyLengthYhalv ) {
             startPosY += skyLengthY;
 
-        } else if ( tempY < startPosY - skyLengthYhalv ) {
+        } else if ( posY < startPosY - skyLengthYhalv ) {
             startPosY -= skyLengthY;
         }
     }

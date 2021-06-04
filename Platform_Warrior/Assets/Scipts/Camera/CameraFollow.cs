@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour {
 
-    private const string PLAYER_TAG = "Player";
-
     private const float cameraOffsetX = 10f;
     private const float cameraOffsetY = 3f;
     private const float smoothRunSpeed = 6f;
@@ -19,16 +17,13 @@ public class CameraFollow : MonoBehaviour {
     private Vector3 latestRotationOffet;
     private Vector3 playerPosition;
 
+    [SerializeField]
     private GameObject playerObject;
     private PlayerMovement playerMovement;
 
-    void Start() {
-
-        playerObject = GameObject.FindWithTag(PLAYER_TAG);
-    }
-
     private void LateUpdate() {
 
+        // get data
         playerMovement = playerObject.GetComponent<PlayerMovement>();
         playerPosition = playerObject.transform.position;
 
